@@ -1,0 +1,29 @@
+{
+	"geode": "5.8.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "le10x.globed_in_pause_menu",
+	"version": "1.0.0",
+	"name": "Globed In Pause Menu",
+	"developer": "le10x",
+	"description": "Agrega un acceso rapido a Globed en el menu de pausa.",
+	"repository": "https://github.com",
+	"tags": ["interface"],
+	"settings": {},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": "v1.23.3",
+			"importance": "required"
+		},
+		{
+			"id": "dankmeme.globed2",
+			"version": "v2.1.4",
+			"importance": "optional"
+		}
+	]
+}
