@@ -10,9 +10,9 @@
 	"version": "1.0.0",
 	"name": "Globed In Pause Menu",
 	"developer": "le10x",
-	"description": "Agrega un acceso rápido a Globed en el menú de pausa.",
+	"description": "Agrega un acceso rapido a Globed en el menu de pausa.",
 	"repository": "https://github.com",
-	"tags": ["interface", "multiplayer"],
+	"tags": ["interface"],
 	"settings": {},
 	"dependencies": [
 		{
