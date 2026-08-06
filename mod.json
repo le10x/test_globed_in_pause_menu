@@ -16,8 +16,13 @@
 	"settings": {},
 	"dependencies": [
 		{
+			"id": "geode.node-ids",
+			"version": "v1.23.3",
+			"importance": "required"
+		},
+		{
 			"id": "dankmeme.globed2",
-			"version": ">=2.1.4",
+			"version": "v2.1.4",
 			"importance": "optional"
 		}
 	]
