@@ -14,16 +14,14 @@
 	"repository": "https://github.com",
 	"tags": ["interface"],
 	"settings": {},
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
+	"dependencies": {
+		"geode.node-ids": {
 			"version": "v1.23.3",
 			"importance": "required"
 		},
-		{
-			"id": "dankmeme.globed2",
+		"dankmeme.globed2": {
 			"version": "v2.1.4",
 			"importance": "optional"
 		}
-	]
+	}
 }
