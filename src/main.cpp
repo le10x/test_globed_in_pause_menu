@@ -4,9 +4,10 @@
 using namespace geode::prelude;
 
 class $modify(MyPauseLayer, PauseLayer) {
-    bool init() {
-        // Ejecutar primero la inicialización original de RobTop
-        if (!PauseLayer::init()) return false;
+    // En GD 2.2081 init requiere el parámetro bool 'unfocused'
+    bool init(bool unfocused) {
+        // Pasar el argumento obligatoriamente a la inicialización original de RobTop
+        if (!PauseLayer::init(unfocused)) return false;
 
         // 1. Verificación segura: Si el usuario no tiene Globed activo, no añadimos el botón
         if (!Loader::get()->isModLoaded("dankmeme.globed2")) {
@@ -40,12 +41,12 @@ class $modify(MyPauseLayer, PauseLayer) {
 
     // Callback que se ejecuta cuando el jugador presiona tu nuevo botón
     void onGlobedButton(CCObject* sender) {
-        // Forma estándar y moderna de despachar un evento de texto genérico a través del SDK
-        // Globed escucha eventos que inicien con su ID para abrir su menú principal
-        auto ev = geode::Event("dankmeme.globed2/open-menu");
+        // En Geode v5, para despachar hilos/eventos globales de texto se usa DispatchEvent
+        // Esto envía de forma segura la orden que Globed escucha para desplegar su interfaz
+        auto ev = DispatchEvent("dankmeme.globed2/open-menu", nullptr);
         ev.post();
         
-        // Opcional: Descomenta la línea de abajo si quieres que se cierre el menú de pausa al tocarlo
+        // Opcional: Descomenta la línea de abajo si quieres que se reanude el nivel al tocar el botón
         // this->onResume(sender);
     }
 };
