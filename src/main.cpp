@@ -3,16 +3,21 @@
 
 using namespace geode::prelude;
 
+// Definimos una estructura limpia para estructurar nuestro evento inter-mod personalizado
+struct GlobedMenuEvent : public Event {
+    GlobedMenuEvent() {}
+};
+
 class $modify(MyPauseLayer, PauseLayer) {
     bool init(bool unfocused) {
         if (!PauseLayer::init(unfocused)) return false;
 
-        // 1. Verificar si Globed está activo
+        // 1. Verificar de forma segura si Globed está activo
         if (!Loader::get()->isModLoaded("dankmeme.globed2")) {
             return true; 
         }
 
-        // 2. Crear el botón
+        // 2. Crear el botón utilizando un sprite nativo de RobTop
         auto spr = CCSprite::createWithSpriteFrameName("GJ_chatBtn_001.png");
         if (!spr) return true; 
 
@@ -22,7 +27,7 @@ class $modify(MyPauseLayer, PauseLayer) {
             menu_selector(MyPauseLayer::onGlobedButton)
         );
 
-        // 3. Insertar en el menú izquierdo
+        // 3. Insertar el botón en el menú de la izquierda del PauseLayer
         if (auto menu = this->getChildByID("left-button-menu")) {
             menu->addChild(button);
             button->setID("globed-pause-button"_spr);
@@ -32,13 +37,14 @@ class $modify(MyPauseLayer, PauseLayer) {
         return true;
     }
 
-    // Callback al presionar el botón
+    // Callback que se ejecuta cuando el jugador pulsa el botón
     void onGlobedButton(CCObject* sender) {
-        // Obtenemos el mod de Globed de forma segura
-        if (auto globedMod = Loader::get()->getLoadedMod("dankmeme.globed2")) {
-            // Esta es la API universal de Geode para disparar acciones en otros mods por su ID
-            // Le envía la orden directa de abrir su menú sin usar clases extrañas
-            Loader::get()->dispatchEvent("dankmeme.globed2/open-menu", nullptr);
-        }
+        // En Geode, disparar un evento estructurado con una ID de cadena se realiza publicando
+        // su disparador correspondiente hacia la red global del Loader
+        GlobedMenuEvent ev;
+        ev.post();
+
+        // Opcional: Descomenta la línea de abajo si prefieres que el menú de pausa se cierre solo
+        // this->onResume(sender);
     }
 };
