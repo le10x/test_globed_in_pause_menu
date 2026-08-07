@@ -21,7 +21,7 @@
 		},
 		"dankmeme.globed2": {
 			"version": "v2.1.4",
-			"importance": "optional"
+			"importance": "suggested"
 		}
 	}
 }
